@@ -1,0 +1,315 @@
+//? footer
+$footerbackground: #333;
+$minmax: 100%;
+$textsize: 24px;
+$fotheight: 55vh;
+$minitext: #354c04;
+$textdidi: #243305;
+.minicopyright {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FAF9F5;
+  .copydiv {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #243305;
+    border-top: 1px solid $minitext;
+  }
+}
+footer {
+  width: $minmax;
+  font-size: $textsize;
+  height: $fotheight;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FAF9F5;
+
+  .fotcont {
+    width: 80%;
+    height: $minmax;
+    display: flex;
+    gap: 10px;
+    margin-top: 100px;
+    .contitemsfooter {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 50px;
+
+      h1 {
+        position: relative;
+        display: inline-block;
+        font-family: "Edu NSW ACT Hand Pre", cursive;
+        font-size: 28px;
+        color: $textdidi;
+      }
+      h1::after {
+        position: absolute;
+        content: "";
+        width: 45px;
+        height: 2px;
+        top: 50%;
+        right: -55px;
+        margin-top: -1px;
+        background-color: $textdidi;
+      }
+      .navlistkkrs {
+        position: relative;
+        left: 60px;
+      }
+      .navlistkkrs222 {
+        position: relative;
+        left: 30px;
+      }
+      #brs1 {
+        position: relative;
+        bottom: 50px;
+      }
+      #nks {
+        position: relative;
+        top: 30px;
+      }
+      ul {
+        position: relative;
+        right: 30px;
+        height: 70%;
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+        gap: 10px;
+        text-align: left;
+      }
+
+      a {
+        display: flex;
+        margin-bottom: 5px;
+        padding: 0;
+        text-align: left;
+        color: $minitext;
+        font-size: 16.8px;
+        font-weight: normal;
+        text-transform: capitalize;
+        transition: 0.5s ease-in-out;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      a::before {
+        content: "";
+        position: absolute;
+        margin-top: 20px;
+        width: 0px;
+        height: 2px;
+        background-color: $minitext;
+        transition: 0.3s ease-in-out;
+      }
+      a:hover::before {
+        width: 100%;
+      }
+      .ragadiv {
+        display: flex;
+        gap: 30px;
+        span {
+          border: 1px solid $minitext;
+          border-radius: 50px;
+          padding: 20px;
+          width: 69px;
+          text-align: center;
+          transition: 0.3s ease-in-out;
+          color: #243305;
+        }
+
+        span:hover {
+          background-color: white;
+          color: black;
+          cursor: pointer;
+        }
+        span:hover .fa-facebook-f {
+          color: blue;
+        }
+        span:hover .fa-instagram {
+          color: #c13584;
+        }
+        span:hover .fa-youtube {
+          color: red;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1325px) {
+  footer {
+    width: $minmax;
+    font-size: $textsize;
+    height: $fotheight;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .fotcont {
+      width: 100%;
+      height: $minmax;
+      display: flex;
+      gap: 10px;
+      .contitemsfooter {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
+
+        h1 {
+          position: relative;
+          display: inline-block;
+          font-family: "Edu NSW ACT Hand Pre", cursive;
+          font-size: 26px;
+          color: $textdidi;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1050px) {
+  footer {
+    width: $minmax;
+    font-size: $textsize;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .fotcont {
+      width: 100%;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      .contitemsfooter {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
+
+        h1 {
+          position: relative;
+          display: inline-block;
+          font-family: "Edu NSW ACT Hand Pre", cursive;
+          font-size: 18px;
+          color: $textdidi;
+        }
+
+        .ragadiv {
+          display: flex;
+          gap: 20px;
+          span {
+            border: 1px solid #243305;
+            color: #243305;
+            border-radius: 50px;
+            padding: 20px;
+            width: 69px;
+            text-align: center;
+            transition: 0.3s ease-in-out;
+          }
+          span:hover {
+            background-color: white;
+            color: black;
+            cursor: pointer;
+          }
+          span:hover .fa-facebook-f {
+            color: blue;
+          }
+          span:hover .fa-instagram {
+            color: #c13584;
+          }
+          span:hover .fa-youtube {
+            color: red;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 710px) {
+  footer {
+    width: $minmax;
+    font-size: $textsize;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .fotcont {
+      width: 100%;
+      height: 150vh;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 10px;
+      .contitemsfooter {
+        width: 100%;
+        height: 100%;
+        min-height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
+
+        h1 {
+          position: relative;
+          display: inline-block;
+          font-family: "Edu NSW ACT Hand Pre", cursive;
+          font-size: 18px;
+          color: $textdidi;
+        }
+        .navlistkkrs {
+          position: relative;
+          left: 30px;
+        }
+        .ragadiv {
+          display: flex;
+          gap: 20px;
+          span {
+            border: 1px solid $textdidi;
+            color: black;
+            border-radius: 50px;
+            padding: 20px;
+            width: 69px;
+            text-align: center;
+            transition: 0.3s ease-in-out;
+          }
+          span:hover {
+            background-color: white;
+            color: black;
+            cursor: pointer;
+          }
+          span:hover .fa-facebook-f {
+            color: blue;
+          }
+          span:hover .fa-instagram {
+            color: #c13584;
+          }
+          span:hover .fa-youtube {
+            color: red;
+          }
+        }
+      }
+    }
+  }
+}

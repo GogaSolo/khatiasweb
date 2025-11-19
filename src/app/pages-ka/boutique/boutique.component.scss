@@ -1,0 +1,393 @@
+
+main {
+  width: 100%;
+  height: auto;
+}
+figure {
+  width: 100%;
+  height: 100%;
+  max-height: 800px;
+  min-height: 600px;
+  background: url(/assets/saitissuratbi/IMG_2133.JPG) center bottom 35% no-repeat;
+  background-size: 100%;
+}
+
+section {
+  width: 100%;
+  height: auto;
+  display: flex;
+  padding: 138px 0px 150px 0px;
+  .section-left {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    h2 {
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: #243305;
+      font-size: 40px;
+      line-height: 1.16em;
+      letter-spacing: 0.05em;
+      margin: 25px 0;
+      -ms-word-wrap: break-word;
+      word-wrap: break-word;
+    }
+    p {
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: #243305;
+      font-size: 26px;
+      line-height: 1.16em;
+      letter-spacing: 0.05em;
+      margin: 25px 0;
+      -ms-word-wrap: break-word;
+      word-wrap: break-word;
+    }
+    h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #354c04;
+
+      hr {
+        width: 30px;
+        height: 1px;
+        outline: none;
+        border: none;
+        background-color: #354c04;
+      }
+    }
+  }
+}
+.section-right {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  color: #333333;
+  font-size: 20px;
+  p {
+    --widgets-spacing: 20px 20px;
+  }
+}
+@media screen and (max-width: 1250px) {
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+    .section-left {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin: 0;
+    }
+  }
+}
+
+$colorcode: #243305;
+
+.figcaption {
+  width: 100%;
+  height: 70vh;
+  background: url(/assets/saitissuratbi/boutique2.JPG) center center no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+}
+
+//
+
+.asi {
+  width: 100%;
+  height: 700px;
+  display: flex;
+  align-items: center;
+  .asideleft {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+
+    h1 {
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: #243305;
+      font-size: 50px;
+      line-height: 1.16em;
+      margin: 25px 0;
+      -ms-word-wrap: break-word;
+      word-wrap: break-word;
+    }
+    h3 {
+      font-family: "Ibarra Real Nova", serif;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #354c04;
+      padding-right: 400px;
+
+      hr {
+        width: 30px;
+        height: 1px;
+        outline: none;
+        border: none;
+        background-color: #354c04;
+      }
+    }
+    p {
+      margin-top: 40px;
+      color: #333333;
+      font-size: 16px;
+      line-height: 1.16em;
+      letter-spacing: 0.05em;
+      font-family: "Barlow Condensed", sans-serif;
+    }
+  }
+  .asideright {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 30px;
+    gap: 10px;
+    position: relative;
+    .leftimgbig {
+      width: 100%;
+      height: 90%;
+      .img1 {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+      h3 {
+        margin-top: 30px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #243305;
+        font-size: 24px;
+        line-height: 1.16em;
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+      }
+      h5 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #243305;
+        font-size: 13px;
+        line-height: 1.16em;
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+      }
+    }
+    .rightbigdiv {
+      width: 100%;
+      height: 90%;
+      .img1 {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+      h3 {
+        width: 100%;
+        margin-top: 30px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #243305;
+        font-size: 24px;
+        line-height: 1.16em;
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+      }
+      h5 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #243305;
+        font-size: 13px;
+        line-height: 1.16em;
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .asi {
+    width: 100%;
+    height: 100%;
+  }
+}
+@media screen and (max-width: 590px) {
+  .asi {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    .asideleft {
+      margin-top: 240px;
+      width: 100%;
+      height: 30%;
+      #asidelefth1 {
+        padding: 20px;
+      }
+      #sadzagloba {
+        display: none;
+      }
+    }
+    .asideright {
+      width: 100%;
+      display: flex;
+      gap: 130px;
+      justify-content: center;
+      flex-direction: column;
+      margin-top: 40px;
+
+      .rightbigdiv {
+        width: 100%;
+        height: 500px;
+        h3 {
+          font-family: 16px;
+        }
+      }
+      .leftimgbig {
+        width: 100%;
+        height: 500px;
+      }
+    }
+  }
+  .wineagw {
+    width: 100%;
+    height: auto;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .asi {
+    width: 100%;
+    height: 500px;
+    .asideleft {
+      padding: 20px;
+      h1 {
+        font-size: 30px;
+      }
+      h3 {
+        display: none;
+        font-family: "Ibarra Real Nova", serif;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #354c04;
+        padding-right: 100px;
+      }
+      p {
+        margin-top: 30px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1020px) {
+  .asi {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .asideleft {
+      height: 20%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      p {
+        display: none;
+      }
+    }
+    .asideright {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+    }
+    .rightbigdiv {
+      width: 100%;
+      height: 90%;
+
+      .img1 {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+
+      h3 {
+        margin-top: 30px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #243305;
+        font-size: 24px;
+        line-height: 1.16em;
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+      }
+      h5 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #243305;
+        font-size: 13px;
+        line-height: 1.16em;
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+      }
+    }
+  }
+}
+
+//
+.map {
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  iframe {
+    width: 80%;
+    height: 80%;
+  }
+}

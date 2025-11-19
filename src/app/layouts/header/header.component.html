@@ -1,0 +1,129 @@
+<!-- layouts/header/header.component.html -->
+<header>
+  <!-- Header Main Section -->
+  <div class="header-main">
+    <div class="header-div">
+      <h5 id="akas2">Dakishvili Family Vineyards</h5>
+    </div>
+    <div class="header-div">
+      <h5 id="akas1">
+        <i class="fa-solid fa-location-dot"></i>
+        Erekle II №2, Telavi, Georgia
+      </h5>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav>
+    <div class="navbardiv">
+      <!-- Left Navigation -->
+      <div class="navleft">
+        <div class="searchdiv">
+          <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+          <!-- <input
+            type="text"
+            placeholder=""
+            [(ngModel)]="searchQuery"
+            (keyup.enter)="onSearch()"
+          /> -->
+        </div>
+        <ul>
+          <li *ngFor="let item of leftMenuItems">
+            <a [routerLink]="item.route" routerLinkActive="active">
+              {{ item.label }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Logo -->
+      <div class="logo">
+        <a routerLink="/home">
+          <img src="/assets/fotoebi/logo.png" alt="Dakishvili Wines Logo" />
+        </a>
+      </div>
+
+      <!-- Right Navigation -->
+      <div class="navright">
+        <ul>
+          <li *ngFor="let item of rightMenuItems">
+            <a [routerLink]="item.route" routerLinkActive="active">
+              {{ item.label }}
+            </a>
+          </li>
+        </ul>
+        <div class="language">
+                    <button (click)="switchLanguage('ENG')" [class.active]="currentLanguage === 'ENG'">ENG</button>
+
+          <button (click)="switchLanguage('ქარ')" 
+          [class.active]="currentLanguage === 'ქარ'">
+          ქარ
+        </button>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation -->
+  <div id="nav2">
+    <div class="submenumiddlepxdiv">
+      <a routerLink="/home">
+        <img src="/assets/fotoebi/dakishvili logo.png" alt="Dakishvili Logo" />
+      </a>
+    </div>
+    <div class="submenumiddlepxdiv raiss">
+      <button
+        class="burgerBtn"
+        [class.is-active]="isMenuOpen"
+        (click)="toggleMenu()"
+      >
+        <span id="kiks"></span>
+        <span id="akaers"></span>
+        <span id="kiks"></span>
+      </button>
+    </div>
+  </div>
+
+ <!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" [class.open]="isMenuOpen">
+  <div class="mobile-menu-content">
+    
+    <!-- ლოგო -->
+    <div class="mobile-logo">
+      <a routerLink="/" (click)="toggleMenu()">
+        <img src="/assets/imgs/h1-png-03.png" alt="Logo" />
+      </a>
+    </div>
+
+    <!-- მენიუს ლინკები -->
+    <ul class="mobile-menu-list">
+      <li *ngFor="let item of leftMenuItems">
+        <a [routerLink]="item.route" (click)="toggleMenu()">{{ item.label }}</a>
+      </li>
+      <li *ngFor="let item of rightMenuItems">
+        <a [routerLink]="item.route" (click)="toggleMenu()">{{ item.label }}</a>
+      </li>
+    </ul>
+
+    <!-- ენის გადამრთველი -->
+    <div class="mobile-language">
+      <button
+        [class.active]="currentLanguage === 'ENG'"
+        (click)="switchLanguage('ENG'); toggleMenu()"
+      >
+        ENG
+      </button>
+      <button
+        [class.active]="currentLanguage === 'ქარ'"
+        (click)="switchLanguage('ქარ'); toggleMenu()"
+      >
+        ქარ
+      </button>
+      
+    </div>
+  </div>
+</div>
+
+
+</header>

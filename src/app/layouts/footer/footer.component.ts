@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { StorageService } from '../../storage.service';
 
 @Component({
   selector: 'app-footer',
@@ -9,25 +11,39 @@ import { RouterModule } from '@angular/router';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit, OnDestroy {
+  currentLanguage: 'ENG' | 'ქარ' = 'ENG';
+  private languageSubscription?: Subscription;
+
   // Navigation links
   navigationLinks = [
-    { name: 'Home', route: '/' },
-    { name: 'About', route: '/about' },
-    { name: 'Wines', route: '/wines' },
-    { name: 'Vineyard', route: '/vineyard' },
-    { name: 'Boutique', route: '/boutique' },
-    { name: 'Cellar', route: '/cellar' },
+    { name: 'Home', nameKa: 'მთავარი', route: '/home' },
+    { name: 'About', nameKa: 'ჩვენს შესახებ', route: '/about' },
+    { name: 'Wines', nameKa: 'ღვინოები', route: '/wines' },
+    { name: 'Vineyard', nameKa: 'მეღვინეობა', route: '/vineyard' },
+    { name: 'Boutique', nameKa: 'ბუტიკი', route: '/boutique' },
+    { name: 'Cellar', nameKa: 'ღვინის მარანი', route: '/cellar' },
   ];
 
   // Wine Cellar contact info
   wineCellarInfo = {
     title: 'Wine Cellar',
+    titleKa: 'ღვინის მარანი',
     contacts: [
-      { text: 'Village Shalauri, Telavi, Georgia', type: 'address' },
-      { text: '+995 577508029', type: 'phone', href: 'tel:+995577508029' },
+      { 
+        text: 'Village Shalauri, Telavi, Georgia', 
+        textKa: 'სოფ. შალაური, თელავი, საქართველო',
+        type: 'address' 
+      },
+      { 
+        text: '+995 577508029', 
+        textKa: '+995 577508029',
+        type: 'phone', 
+        href: 'tel:+995577508029' 
+      },
       {
         text: 'info@dakishvili.ge',
+        textKa: 'info@dakishvili.ge',
         type: 'email',
         href: 'mailto:info@dakishvili.ge',
       },
@@ -37,15 +53,32 @@ export class FooterComponent {
   // Wine Boutique contact info
   wineBoutiqueInfo = {
     title: 'Wine Boutique',
+    titleKa: 'ღვინის ბუტიკი',
     contacts: [
-      { text: 'Erekle II №2, Telavi, Georgia', type: 'address' },
-      { text: '+995 571162362', type: 'phone', href: 'tel:+995571162362' },
+      { 
+        text: 'Erekle II №2, Telavi, Georgia', 
+        textKa: 'ერეკლე II №2, თელავი, საქართველო',
+        type: 'address' 
+      },
+      { 
+        text: '+995 571162362', 
+        textKa: '+995 571162362',
+        type: 'phone', 
+        href: 'tel:+995571162362' 
+      },
       {
         text: 'boutique@dakishvili.ge',
+        textKa: 'boutique@dakishvili.ge',
         type: 'email',
         href: 'mailto:boutique@dakishvili.ge',
       },
     ],
+  };
+
+  // Social Media label
+  socialMediaLabel = {
+    title: 'Follow Us',
+    titleKa: 'გამოგვყევით'
   };
 
   // Social media links
@@ -55,26 +88,60 @@ export class FooterComponent {
       icon: 'fa-brands fa-facebook-f',
       url: 'https://facebook.com/dakishvili',
       ariaLabel: 'Visit our Facebook page',
+      ariaLabelKa: 'ეწვიეთ ჩვენს Facebook გვერდს',
     },
     {
       name: 'Instagram',
       icon: 'fa-brands fa-instagram',
       url: 'https://instagram.com/dakishvili',
       ariaLabel: 'Visit our Instagram page',
+      ariaLabelKa: 'ეწვიეთ ჩვენს Instagram გვერდს',
     },
     {
       name: 'YouTube',
       icon: 'fa-brands fa-youtube',
       url: 'https://youtube.com/dakishvili',
       ariaLabel: 'Visit our YouTube channel',
+      ariaLabelKa: 'ეწვიეთ ჩვენს YouTube არხს',
     },
   ];
 
   // Copyright info
-  copyrightText = '© 2025 Dakishvili Familly Vineyards';
+  copyrightText = '© 2025 Dakishvili Family Vineyards';
+  copyrightTextKa = '© 2025 დაკიშვილების საოჯახო მარნები';
   currentYear = new Date().getFullYear();
 
-  constructor() {}
+  constructor(
+    private storageService: StorageService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    // ენის გამოწერა
+    this.currentLanguage = this.storageService.getCurrentLanguage();
+    this.languageSubscription = this.storageService.languageChange.subscribe(
+      (lang) => {
+        this.currentLanguage = lang;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    if (this.languageSubscription) {
+      this.languageSubscription.unsubscribe();
+    }
+  }
+
+  // დინამიური route-ის გენერაცია
+  getRoute(route: string): string {
+    return this.currentLanguage === 'ქარ' ? '/ka' + route : route;
+  }
+
+  // ტექსტის მიღება მიმდინარე ენით
+  getText(item: any, field: string): string {
+    const kaField = field + 'Ka';
+    return this.currentLanguage === 'ქარ' && item[kaField] ? item[kaField] : item[field];
+  }
 
   // Handle contact clicks
   onContactClick(contact: any): void {

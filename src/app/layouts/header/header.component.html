@@ -29,8 +29,8 @@
         </div>
         <ul>
           <li *ngFor="let item of leftMenuItems">
-            <a [routerLink]="item.route" routerLinkActive="active">
-              {{ item.label }}
+            <a [routerLink]="getRoute(item.route)" routerLinkActive="active">
+              {{ currentLanguage === 'ქარ' ? translateLabelKa(item.label) : item.label }}
             </a>
           </li>
         </ul>
@@ -38,7 +38,7 @@
 
       <!-- Logo -->
       <div class="logo">
-        <a routerLink="/home">
+        <a [routerLink]="getRoute('/home')">
           <img src="/assets/fotoebi/logo.png" alt="Dakishvili Wines Logo" />
         </a>
       </div>
@@ -47,19 +47,19 @@
       <div class="navright">
         <ul>
           <li *ngFor="let item of rightMenuItems">
-            <a [routerLink]="item.route" routerLinkActive="active">
-              {{ item.label }}
+            <a [routerLink]="getRoute(item.route)" routerLinkActive="active">
+              {{ currentLanguage === 'ქარ' ? translateLabelKa(item.label) : item.label }}
             </a>
           </li>
         </ul>
+
         <div class="language">
-                    <button (click)="switchLanguage('ENG')" [class.active]="currentLanguage === 'ENG'">ENG</button>
-
-          <button (click)="switchLanguage('ქარ')" 
-          [class.active]="currentLanguage === 'ქარ'">
-          ქარ
-        </button>
-
+          <button (click)="switchLanguage('ENG')" [class.active]="currentLanguage === 'ENG'">
+            ENG
+          </button>
+          <button (click)="switchLanguage('ქარ')" [class.active]="currentLanguage === 'ქარ'">
+            ქარ
+          </button>
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@
   <!-- Mobile Navigation -->
   <div id="nav2">
     <div class="submenumiddlepxdiv">
-      <a routerLink="/home">
+      <a [routerLink]="getRoute('/home')">
         <img src="/assets/fotoebi/dakishvili logo.png" alt="Dakishvili Logo" />
       </a>
     </div>
@@ -85,45 +85,47 @@
     </div>
   </div>
 
- <!-- Mobile Menu Overlay -->
-<div class="mobile-menu-overlay" [class.open]="isMenuOpen">
-  <div class="mobile-menu-content">
-    
-    <!-- ლოგო -->
-    <div class="mobile-logo">
-      <a routerLink="/" (click)="toggleMenu()">
-        <img src="/assets/imgs/h1-png-03.png" alt="Logo" />
-      </a>
-    </div>
-
-    <!-- მენიუს ლინკები -->
-    <ul class="mobile-menu-list">
-      <li *ngFor="let item of leftMenuItems">
-        <a [routerLink]="item.route" (click)="toggleMenu()">{{ item.label }}</a>
-      </li>
-      <li *ngFor="let item of rightMenuItems">
-        <a [routerLink]="item.route" (click)="toggleMenu()">{{ item.label }}</a>
-      </li>
-    </ul>
-
-    <!-- ენის გადამრთველი -->
-    <div class="mobile-language">
-      <button
-        [class.active]="currentLanguage === 'ENG'"
-        (click)="switchLanguage('ENG'); toggleMenu()"
-      >
-        ENG
-      </button>
-      <button
-        [class.active]="currentLanguage === 'ქარ'"
-        (click)="switchLanguage('ქარ'); toggleMenu()"
-      >
-        ქარ
-      </button>
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" [class.open]="isMenuOpen">
+    <div class="mobile-menu-content">
       
+      <!-- ლოგო -->
+      <div class="mobile-logo">
+        <a [routerLink]="getRoute('/home')" (click)="toggleMenu()">
+          <img src="/assets/imgs/h1-png-03.png" alt="Logo" />
+        </a>
+      </div>
+
+      <!-- მენიუს ლინკები -->
+      <ul class="mobile-menu-list">
+        <li *ngFor="let item of leftMenuItems">
+          <a [routerLink]="getRoute(item.route)" (click)="toggleMenu()">
+            {{ currentLanguage === 'ქარ' ? translateLabelKa(item.label) : item.label }}
+          </a>
+        </li>
+        <li *ngFor="let item of rightMenuItems">
+          <a [routerLink]="getRoute(item.route)" (click)="toggleMenu()">
+            {{ currentLanguage === 'ქარ' ? translateLabelKa(item.label) : item.label }}
+          </a>
+        </li>
+      </ul>
+
+      <!-- ენის გადამრთველი -->
+      <div class="mobile-language">
+        <button
+          [class.active]="currentLanguage === 'ENG'"
+          (click)="switchLanguage('ENG'); toggleMenu()"
+        >
+          ENG
+        </button>
+        <button
+          [class.active]="currentLanguage === 'ქარ'"
+          (click)="switchLanguage('ქარ'); toggleMenu()"
+        >
+          ქარ
+        </button>
+      </div>
     </div>
   </div>
-</div>
-
 
 </header>

@@ -6,8 +6,8 @@
       <div class="navlist">
         <ul id="nks">
           <li *ngFor="let link of navigationLinks">
-            <a [routerLink]="link.route" routerLinkActive="active">
-              {{ link.name }}
+            <a [routerLink]="getRoute(link.route)" routerLinkActive="active">
+              {{ getText(link, 'name') }}
             </a>
           </li>
         </ul>
@@ -16,7 +16,7 @@
 
     <!-- Wine Cellar Section -->
     <div class="contitemsfooter">
-      <h1 id="brs1">{{ wineCellarInfo.title }}</h1>
+      <h1 id="brs1">{{ getText(wineCellarInfo, 'title') }}</h1>
       <div class="navlistkkrs">
         <ul>
           <li *ngFor="let contact of wineCellarInfo.contacts">
@@ -25,7 +25,7 @@
               [class]="contact.type"
               (click)="contact.href ? null : $event.preventDefault()"
             >
-              {{ contact.text }}
+              {{ getText(contact, 'text') }}
             </a>
           </li>
         </ul>
@@ -34,7 +34,7 @@
 
     <!-- Wine Boutique Section -->
     <div class="contitemsfooter">
-      <h1 id="brs1">{{ wineBoutiqueInfo.title }}</h1>
+      <h1 id="brs1">{{ getText(wineBoutiqueInfo, 'title') }}</h1>
       <div class="navlistkkrs222">
         <ul>
           <li *ngFor="let contact of wineBoutiqueInfo.contacts">
@@ -43,7 +43,7 @@
               [class]="contact.type"
               (click)="contact.href ? null : $event.preventDefault()"
             >
-              {{ contact.text }}
+              {{ getText(contact, 'text') }}
             </a>
           </li>
         </ul>
@@ -52,13 +52,13 @@
 
     <!-- Social Media Section -->
     <div class="contitemsfooter">
-      <h1 id="brs1">Follow Us</h1>
+      <h1 id="brs1">{{ getText(socialMediaLabel, 'title') }}</h1>
       <div class="navlist">
         <div class="ragadiv">
           <span *ngFor="let social of socialLinks">
             <i
               [class]="social.icon"
-              [attr.aria-label]="social.ariaLabel"
+              [attr.aria-label]="getText(social, 'ariaLabel')"
               (click)="onSocialClick(social)"
               [title]="social.name"
             >
@@ -73,6 +73,6 @@
 <!-- Copyright Section -->
 <div class="minicopyright">
   <div class="copydiv">
-    <p id="last">{{ copyrightText }}</p>
+    <p id="last">{{ currentLanguage === 'ქარ' ? copyrightTextKa : copyrightText }}</p>
   </div>
 </div>

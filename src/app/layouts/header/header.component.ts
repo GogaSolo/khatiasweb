@@ -1,19 +1,25 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+// layouts/header/header.component.ts
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, RouterLink, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { StorageService } from '../../storage.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   searchQuery: string = '';
   isMenuOpen: boolean = false;
-  currentLanguage: string = 'ქარ';
+  currentLanguage: 'ENG' | 'ქარ' = 'ENG';
+  private languageSubscription?: Subscription;
+  private routerSubscription?: Subscription;
 
   leftMenuItems = [
     { label: 'Home', route: '/home' },
@@ -27,33 +33,95 @@ export class HeaderComponent {
     { label: 'Cellar', route: '/cellar' },
   ];
 
-  constructor(private router: Router) {}
+  // დინამიურად გენერირებული routerLink
+  getRoute(route: string): string {
+    return this.currentLanguage === 'ქარ' ? '/ka' + route : route;
+  }
 
-  onSearch() {
-    console.log('Searching for:', this.searchQuery);
-    // აქ შეგიძლია search ლოგიკა დაამატო
+  constructor(
+    private router: Router,
+    private storageService: StorageService  // Fixed: lowercase
+  ) {}
+
+  ngOnInit() {
+    // პირველი ჩატვირთვისას ენის სინქრონიზაცია URL-თან
+    this.syncLanguageWithRoute();
+
+    // ენის გამოწერა - Fixed: using correct service reference
+    this.languageSubscription = this.storageService.languageChange.subscribe(
+      (lang) => {
+        this.currentLanguage = lang;
+      }
+    );
+
+    // როუტის ცვლილებებზე დაკვირვება
+    this.routerSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.syncLanguageWithRoute();
+      });
+  }
+
+  ngOnDestroy() {
+    if (this.languageSubscription) {
+      this.languageSubscription.unsubscribe();
+    }
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
+  }
+
+  private syncLanguageWithRoute() {
+    const currentUrl = this.router.url;
+    const savedLanguage = this.storageService.getCurrentLanguage();  // Fixed
+
+    if (currentUrl.startsWith('/ka/') && savedLanguage === 'ENG') {
+      this.storageService.setLanguage('ქარ');  // Fixed
+    } else if (!currentUrl.startsWith('/ka/') && savedLanguage === 'ქარ') {
+      this.storageService.setLanguage('ENG');  // Fixed
+    }
   }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  switchLanguage(language: string) {
-    this.currentLanguage = language;
+  switchLanguage(language: 'ENG' | 'ქარ') {
+    this.storageService.setLanguage(language);
 
-    const currentUrl = this.router.url; // მაგ.: "/about" ან "/ka/about"
-    const segments = currentUrl.split('/').filter(s => s); // ["about"] ან ["ka", "about"]
+    const currentUrl = this.router.url;
+    const segments = currentUrl.split('/').filter((s) => s);
+
+    let targetUrl = '';
 
     if (language === 'ქარ') {
-      // ქართულზე გადასვლა
+      // თუ უკვე არ არის /ka/ პრეფიქსი, დავამატოთ
       if (segments[0] !== 'ka') {
-        this.router.navigate(['/ka', ...segments]);
+        targetUrl = '/ka/' + segments.join('/');
+      } else {
+        targetUrl = currentUrl;
       }
-    } else if (language === 'ENG') {
-      // ინგლისურზე გადასვლა
+    } else {
+      // თუ არის /ka/ პრეფიქსი, წავშალოთ
       if (segments[0] === 'ka') {
-        this.router.navigate(['/', ...segments.slice(1)]);
+        targetUrl = '/' + segments.slice(1).join('/');
+      } else {
+        targetUrl = currentUrl;
       }
     }
+
+    this.router.navigateByUrl(targetUrl);
   }
+
+  translateLabelKa(label: string): string {
+    const translations: { [key: string]: string } = {
+      Home: 'მთავარი',
+      About: 'ჩვენს შესახებ',
+      Wines: 'ღვინოები',
+      Vineyard: 'მეღვინეობა',
+      Boutique: 'ბუტიკი',
+      Cellar: 'ღვინის მარანი',
+    };
+    return translations[label] || label;
+}
 }
